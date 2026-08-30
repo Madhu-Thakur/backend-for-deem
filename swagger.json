@@ -1,0 +1,720 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DEEM Portal API",
+    "version": "1.0.0",
+    "description": "DEEM Portal Customer, Address and Service Management API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/api/customers": {
+      "post": {
+        "summary": "Create a new customer",
+        "tags": ["Customers"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all customers",
+        "tags": ["Customers"],
+        "responses": {
+          "200": {
+            "description": "Customers fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/customers/{id}": {
+      "get": {
+        "summary": "Get customer by ID",
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer fetched successfully"
+          },
+          "404": {
+            "description": "Customer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update customer",
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Customer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete customer",
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer deleted successfully"
+          },
+          "404": {
+            "description": "Customer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/addresses": {
+      "post": {
+        "summary": "Create a new address",
+        "tags": ["Addresses"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Address created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all addresses",
+        "tags": ["Addresses"],
+        "responses": {
+          "200": {
+            "description": "Addresses fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/addresses/customer/{customerId}": {
+      "get": {
+        "summary": "Get all addresses of a customer",
+        "tags": ["Addresses"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerIdForAddress"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer addresses fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/addresses/{id}": {
+      "get": {
+        "summary": "Get address by ID",
+        "tags": ["Addresses"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AddressId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address fetched successfully"
+          },
+          "404": {
+            "description": "Address not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update address",
+        "tags": ["Addresses"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AddressId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Address not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete address",
+        "tags": ["Addresses"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AddressId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address deleted successfully"
+          },
+          "404": {
+            "description": "Address not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/services": {
+      "post": {
+        "summary": "Create a new service",
+        "tags": ["Services"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all services",
+        "tags": ["Services"],
+        "responses": {
+          "200": {
+            "description": "Services fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/services/customer/{customerId}": {
+      "get": {
+        "summary": "Get all services of a customer",
+        "tags": ["Services"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerIdForService"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer services fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/services/{id}": {
+      "get": {
+        "summary": "Get service by ID",
+        "tags": ["Services"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ServiceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service fetched successfully"
+          },
+          "404": {
+            "description": "Service not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update service",
+        "tags": ["Services"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ServiceId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Service not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete service",
+        "tags": ["Services"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ServiceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service deleted successfully"
+          },
+          "404": {
+            "description": "Service not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/invoices": {
+      "post": {
+        "summary": "Create a new invoice",
+        "tags": ["Invoices"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Invoice created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all invoices",
+        "tags": ["Invoices"],
+        "responses": {
+          "200": {
+            "description": "Invoices fetched successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
+    "/api/invoices/{id}": {
+      "get": {
+        "summary": "Get invoice by ID",
+        "tags": ["Invoices"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Invoice ID",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice fetched successfully"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+
+      "put": {
+        "summary": "Update invoice",
+        "tags": ["Invoices"],
+       "parameters": [
+  {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "description": "Invoice ID",
+    "schema": {
+      "type": "integer",
+      "example": 1
+    }
+  }
+],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Invoice updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+
+      "delete": {
+        "summary": "Delete invoice",
+        "tags": ["Invoices"],
+      "parameters": [
+  {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "description": "Invoice ID",
+    "schema": {
+      "type": "integer",
+      "example": 1
+    }
+  }
+],
+        "responses": {
+          "200": {
+            "description": "Invoice deleted successfully"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "parameters": {
+      "CustomerId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Customer ID",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      },
+
+      "CustomerIdForAddress": {
+        "name": "customerId",
+        "in": "path",
+        "required": true,
+        "description": "Customer ID",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      },
+
+      "AddressId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Address ID",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      },
+
+      "CustomerIdForService": {
+        "name": "customerId",
+        "in": "path",
+        "required": true,
+        "description": "Customer ID",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      },
+
+      "ServiceId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Service ID",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+
+    "schemas": {
+      "CustomerInput": {
+        "type": "object",
+        "required": ["customer_name", "phone", "email"],
+        "properties": {
+          "customer_name": {
+            "type": "string",
+            "example": "Rahul Sharma"
+          },
+          "company_name": {
+            "type": "string",
+            "example": "Rahul Technologies"
+          },
+          "phone": {
+            "type": "string",
+            "example": "9876543210"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "rahul@example.com"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Active", "Inactive"],
+            "example": "Active"
+          }
+        }
+      },
+
+      "AddressInput": {
+        "type": "object",
+        "required": [
+          "customer_id",
+          "address_type",
+          "address",
+          "city",
+          "state",
+          "pincode"
+        ],
+        "properties": {
+          "customer_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "address_type": {
+            "type": "string",
+            "example": "Office"
+          },
+          "address": {
+            "type": "string",
+            "example": "42, Sector 15"
+          },
+          "gst_number": {
+            "type": "string",
+            "example": "24ABCDE1234F1Z5"
+          },
+          "city": {
+            "type": "string",
+            "example": "Vadodara"
+          },
+          "state": {
+            "type": "string",
+            "example": "Gujarat"
+          },
+          "pincode": {
+            "type": "string",
+            "example": "390015"
+          },
+          "country": {
+            "type": "string",
+            "example": "India"
+          }
+        }
+      },
+
+      "ServiceInput": {
+        "type": "object",
+        "required": ["customer_id", "service_type"],
+        "properties": {
+          "customer_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "service_type": {
+            "type": "string",
+            "example": "Website Development"
+          },
+          "domain": {
+            "type": "string",
+            "example": "example.com"
+          },
+          "renewal_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2027-08-27"
+          },
+          "duration": {
+            "type": "integer",
+            "example": 12
+          },
+          "expiry_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2028-08-27"
+          },
+          "renewal_amount": {
+            "type": "number",
+            "format": "double",
+            "example": 15000
+          },
+          "service_status": {
+            "type": "string",
+            "enum": ["Active", "Inactive", "Expired"],
+            "example": "Active"
+          }
+        }
+      }
+    }
+  }
+}
